@@ -1,0 +1,733 @@
+
+ <div style="text-align: left;">
+        <h2>  Saleh Musnad Tools  | </h2>
+<h2>  🔶️أدوات تحويل نصوص النقوش🔶️</h2>
+</left>
+
+<left>
+<img src="https://static.wixstatic.com/media/62c16e_fd003eb102284f24a2660eb85274b77c~mv2.jpg/v1/crop/x_0,y_0,w_685,h_395/fill/w_370,h_213,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/saleh%20(1)_edited_edited.jpg" alt="" style="width:190px; height:80px;">
+</left><br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أدوات المسند</title>
+</head>
+<body>
+<a href="https://twitter.com/S7Ryn/">Twitter/X@S7Ryn</a><br>
+:  اكتب أو انسخ النص 🅰️
+<br>
+<style> /* Styling for the output box */ #outputBox { border: 5px solid #ccc; padding: 10px; margin-top: 20px; width: 250px; /* Adjust width as needed */ } </style>
+<style> /* Define the width and height of the input box */ #inputText { width: 250px; height: 100px; /* Adjust the height as needed */ } </style>
+<input type="text" id="inputText" placeholder="Paste here...">
+<a href="https://www.lexilogos.com/keyboard/arabian_south.htm"> <br> Keyboard </a>
+<br><br>
+<button style="background-color: lightgreen;" onclick="pasteFromClipboard()">لصق</button>
+<br><br>
+<button onclick="copyInputText()">نسخ </button>
+<button onclick="cutInputText()">قص </button>  
+
+
+<button onclick="deleteInputText()">مسح</button>
+<br><br>
+: اختر نوع التحويل 🅱️
+<br>
+
+من الانجليزية (لاتيني) إلى العربية
+<br>
+<button style="background-color: lightgreen;" onclick="transformInput3()"> ض <-- Ḍ </button>
+<br>
+من العربية إلى الانجليزية (لاتيني)
+<br>
+<button onclick="showResult2()" > Ḍ ⬅️ ض </button>
+<br>
+من العربية أو الإنجليزية إلى المسند
+<br>
+<button onclick="showResult()"> 𐩳 ⬅️ (ض,Ḍ) </button>
+<br>
+من المسند إلى الإنجليزية
+<br>
+<button onclick="transformInput5()">  Ḍ ⬅️ 𐩳 </button>
+<br>
+من المسند إلى العربية
+<br>
+<button onclick="transformInput20()"> 𐩳 ⬅️ ض  </button>
+<br>
+من العربية إلى الإنجليزية
+<br>
+<button onclick="showResult2()" > Dh ⬅️  ض </button>
+<br>
+
+
+
+  
+</body>
+</html>
+
+<br>
+---------------------------------------
+<br>
+: خاص بتحويل ترجمة النقوش وتحسينها 
+<br><br>
+
+<button onclick="transformInput2()"> Ḍ  ⬅️ ترجمة  </button>
+ <br><br>
+<a 
+href="https://translate.google.com/">Translate by Google </a>
+<br>
+
+<div id="outputBox"> 
+<p id="output"></p> 
+</div>
+<button style="background-color: lightgreen;" onclick="copyOutputText()">نسخ</button>
+<button onclick="deleteOutputText()">مسح</button> 
+<br><br>
+<button onclick="showAllResults()">عرض كل النتائج</button>
+
+<script>
+
+
+
+   function showAllResults() {
+ var inputText = document.getElementById("inputText").value;
+            var inputText = document.getElementById("inputText").value;
+            var output = document.getElementById("output");
+            var transformedText = '';
+
+            transformedText += "Text: " + inputText + "\n\n";
+            transformedText += "Musnad: " + transform1(inputText) + "\n\n";
+            transformedText += "ENGLISH: " + transform2(inputText) + "\n\n";
+transformedText += "Latin: " + transform4(inputText) + "\n\n";
+transformedText += "Arabic: " + transform3(inputText) + "\n\n";
+		transformedText += "MUStoARA: " + transform20(inputText) + "\n\n";
+            transformedText += "Capitalized: " + inputText.toUpperCase();
+
+            output.innerText = transformedText;
+        }
+
+
+
+
+function replaceCharacters() {
+    var inputText = document.getElementById("inputText").value;
+    
+    // Replace characters
+    var replacedText = inputText.replaceAll("س٣", "𐩯");
+
+    return replacedText;
+}
+
+
+function transform1(input) {
+  var dictionary = {
+    "s": "𐩪",
+    "s¹": "𐩪",
+    "s²": "𐩦",
+    "s³": "𐩯",
+    "a": "𐩱",
+    "ʾ": "𐩱",
+    "b": "𐩨",
+    "t": "𐩩",
+    "ṯ": "𐩻",
+    "g": "𐩴",
+    "ḥ": "𐩢",
+    "ḫ": "𐩭",
+    "d": "𐩵",
+    "ḏ": "𐩹",
+    "r": "𐩧",
+    "z": "𐩸",
+    "ṣ": "𐩮",
+    "ḍ": "𐩳",
+    "ṭ": "𐩷",
+    "ẓ": "𐩼",
+    "ʿ": "𐩲",
+    "ġ": "𐩶",
+    "f": "𐩰",
+    "q": "𐩤",
+    "k": "𐩫",
+    "l": "𐩡",
+    "m": "𐩣",
+    "n": "𐩬",
+    "h": "𐩠",
+    "w": "𐩥",
+    "y": "𐩺",
+    "S": "𐩪",
+    "S¹": "𐩪",
+    "S²": "𐩦",
+    "S³": "𐩯",
+    "Ṣ": "𐩮",
+    "B": "𐩨",
+    "T": "𐩩",
+    "Ṯ": "𐩻",
+    "G": "𐩴",
+    "Ḥ": "𐩢",
+    "Ḫ": "𐩭",
+    "D": "𐩵",
+    "Ḏ": "𐩹",
+    "R": "𐩧",
+    "Z": "𐩸",
+    "Ṣ": "𐩮",
+    "Ḍ": "𐩳",
+    "Ṭ": "𐩷",
+    "Ẓ": "𐩼",
+    "Ġ": "𐩶",
+    "F": "𐩰",
+    "Q": "𐩤",
+    "K": "𐩫",
+    "L": "𐩡",
+    "M": "𐩣",
+    "N":  "𐩬",
+     "-": "",
+    "H": "𐩠",
+    "W": "𐩥",
+    "Y": "𐩺",
+    "س": "𐩪",
+    "ش": "𐩦",
+    "أ": "𐩱",
+    "ا": "𐩱",
+    "ب": "𐩨",
+    "ت": "𐩩",
+    "ة": "𐩩",
+    "ث": "𐩻",
+    "ج": "𐩴",
+    "ح": "𐩢",
+    "خ": "𐩭",
+    "د": "𐩵",
+    "ذ": "𐩹",
+    "ر": "𐩧",
+    "ز": "𐩸",
+    "ص": "𐩮",
+    "ض": "𐩳",
+    "ط": "𐩷",
+    "ظ": "𐩼",
+    "ع": "𐩲",
+    "غ": "𐩶",
+    "ف": "𐩰",
+    "ق": "𐩤",
+    "ك": "𐩫",
+    "ل": "𐩡",
+    "م": "𐩣",
+    "ن": "𐩬",
+    "ه": "𐩠",
+    "و": "𐩥",
+    "ي": "𐩺",
+    "   ": "|" // Space mapping
+    // Add more mappings as needed
+  };
+
+      
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+
+
+  // Remove spaces between letters within words
+  input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  input = input.replace(/\s/g, " ");
+
+
+ 
+
+   
+
+
+  return input;
+}
+
+function showResult() {
+    var replacedText = replaceCharacters();
+    var transformedText = transform1(replacedText);
+
+    document.getElementById("output").innerText = transformedText;
+}
+
+
+function transformInput2() {
+  var input = document.getElementById("inputText").value;
+  var output = document.getElementById("output");
+  var transformedInput = transform2(input);
+
+  output.textContent = "  " + transformedInput;
+ // document.getElementById("inputText").value = ""; // Clear the input field
+}
+
+
+function transform2(input) {
+  var dictionary = {
+    "s¹": "s",
+    "s²": "sh",
+    "s³": "sch",
+    "ʾ": "a",
+    "b": "b",
+    "t": "t",
+    "ṯ": "th",
+    "g": "g",
+    "ḥ": "h",
+    "ḫ": "kh",
+    "d": "d",
+    "ḏ": "dh",
+    "r": "r",
+    "z": "z",
+    "ṣ": "ss",
+    "ḍ": "dh",
+    "ṭ": "t",
+    "ẓ": "zh",
+    "ʿ": "a",
+    "ġ": "gh",
+    "f": "f",
+    "q": "q",
+    "k": "k",
+    "l": "l",
+    "m": "m",
+    "n": "n",
+    "h": "h",
+    "w": "w",
+    "y": "y",
+    "S¹": "S",
+    "S²": "SH",
+    "S³": "SCH",
+    "Ṣ": "SS",
+    "B": "B",
+    "T": "T",
+    "Ṯ": "TH",
+    "G": "G",
+    "Ḥ": "H",
+    "Ḫ": "KH",
+    "D": "D",
+    "Ḏ": "DH",
+    "R": "R",
+    "Z": "Z",
+    "Ḍ": "DH",
+    "Ṭ": "T",
+    "Ẓ": "ZH",
+    "Ġ": "GH",
+    "F": "F",
+    "Q": "Q",
+    "K": "K",
+    "L": "L",
+    "M": "M",
+    "N":  "N",
+     "-": "-",
+    "H": "H",
+    "W": "W",
+    "Y": "Y",
+    
+    " ": " " // Space mapping
+    // Add more mappings as needed
+  };
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+  // Remove spaces between letters within words
+ // input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  // input = input.replace(/\s/g, " ");
+
+  return input;
+}
+
+
+function transformInput20() {
+  var input = document.getElementById("inputText").value;
+  var output = document.getElementById("output");
+  var transformedInput = transform20(input);
+
+  output.textContent = "  " + transformedInput;
+ // document.getElementById("inputText").value = ""; // Clear the input field
+}
+
+
+function transform20(input) {
+  var dictionary = {
+    "𐩪": "س",
+    "𐩦":"ش",
+    "𐩯":"س٣",
+    "𐩱":"ا",
+    "𐩨":"ب",
+    "𐩩":"ت",
+    "𐩻":"ث",
+    "𐩴":"ج",
+   "𐩢":"ح",
+    "𐩭":"خ",
+    "𐩵":"د",
+    "𐩹":"ذ",
+    "𐩧":"ر",
+    "𐩸":"ز",
+    "𐩮":"ص",
+    "𐩳":"ض",
+    "𐩷":"ط",
+    "𐩼":"ظ",
+    "𐩲":"ع",
+    "𐩶":"غ",
+    "𐩰":"ف",
+    "𐩤":"ق",
+    "𐩫":"ك",
+    "𐩡":"ل",
+    "𐩣":"م",
+    "𐩬":"ن",
+    "𐩠":"ه",
+    "𐩥":"و",
+    "𐩺":"ي",
+" ": " | ",
+  //  " ": " ",
+// Space mapping
+ //  "|":" | "
+    // Add more mappings as needed
+  };
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+  // Remove spaces between letters within words
+ // input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  // input = input.replace(/\s/g, " ");
+     input = input.replace(/\s /g, " | ");
+
+  return input;
+}
+
+
+
+
+function transformInput3() {
+  var input = document.getElementById("inputText").value;
+  var output = document.getElementById("output");
+  var transformedInput = transform3(input);
+
+  output.textContent = "  " + transformedInput;
+ // document.getElementById("inputText").value = ""; // Clear the input field
+}
+
+function transform3(input) {
+  var dictionary = {
+    "s": "س",
+    "s¹": "س",
+    "s²": "ش",
+    "s³": "س٣",
+	"s": "س",
+    "S¹": "س",
+    "S²": "ش",
+    "S³": "س٣",
+    "B": "ب",
+    "T": "ت",
+    "Ṯ": "ث",
+    "G": "ج",
+    "Ḥ": "ح",
+    "Ḫ": "خ",
+    "D": "د",
+    "Ḏ": "ذ",
+    "R": "ر",
+    "Z": "ز",
+    "Ṣ": "ص",
+    "Ḍ": "ض",
+    "Ṭ": "T",
+    "Ẓ": "ظ",
+    "Ġ": "غ",
+    "F": "ف",
+    "Q": "ق",
+    "K": "ك",
+    "L": "ل",
+    "M": "م",
+    "N": "ن",
+    "H": "ه",
+    "W": "و",
+    "Y": "ي",
+     "ʾ": "ا",
+    "b": "ب",
+    "t": "ت",
+    "ṯ": "ث",
+    "g": "ج",
+    "ḥ": "ح",
+    "ḫ": "خ",
+    "d": "د",
+    "ḏ": "ذ",
+    "r": "ر",
+    "z": "ز",
+    "ṣ": "ص",
+    "ḍ": "ض",
+    "ṭ": "ط",
+    "ẓ": "ظ",
+    "ʿ": "ع",
+    "ġ": "غ",
+    "f": "ف",
+    "q": "ق",
+    "k": "ك",
+    "l": "ل",
+    "m": "م",
+    "n": "ن",
+    "h": "ه",
+    "w": "و",
+    "y": "ي",
+     "-": "-", // we can deactivate later
+    " ": " | " // Space mapping
+    // Add more mappings as needed
+  };
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+  // Remove spaces between letters within words
+  input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  input = input.replace(/\s/g, " ");
+
+  return input;
+}
+
+
+
+
+function replaceCharacters9() {
+    var inputText = document.getElementById("inputText").value;
+    
+    // Arabic to English
+    var replacedText = inputText.replaceAll("س٣","S³");
+
+    return replacedText;
+}
+
+function transform4(input) {
+  var dictionary = {
+  
+    "س": "s¹",
+   "ش": "s²",
+   "س٣": "s³",
+    "أ": "ʾ",
+    "ا": "ʾ",
+    "ب": "b",
+    "ت": "t",
+   "ث": "ṯ",
+    "ج": "g",
+    "ح": "ḥ",
+    "خ": "ḫ",
+    "د": "d",
+    "ذ": "ḏ",
+    "ر": "r",
+    "ز": "z",
+   "ص": "ṣ",
+   "ض": "ḍ",
+   "ط":  "ṭ",
+    "ظ": "ẓ",
+  "ع":  "ʿ",
+   "غ": "ġ",
+    "ف": "f",
+    "ق": "q",
+    "ك": "k",
+    "ل": "l",
+    "م": "m",
+    "ن": "n",
+    "ه": "h",
+    "و": "w",
+    "ي": "y",
+    "س": "S¹",
+   "ش": "S²",
+    "س٣": "S³",
+   "ص": "Ṣ",
+    "ب": "B",
+    "ت": "T",
+    "ط": "Ṯ",
+    "ج": "G",
+    "ح": "Ḥ",
+   "خ": "Ḫ",
+    "د": "D",
+   "ذ": "Ḏ",
+    "ر": "R",
+    "ز": "Z",
+   "ص": "Ṣ",
+   "ض": "Ḍ",
+    "ط": "Ṭ",
+    "ظ": "Ẓ",
+    "غ": "Ġ",
+    "ف": "F",
+    "ق": "Q",
+    "ك": "K",
+    "ل": "L",
+    "م": "M",
+    "ن": "N",
+    "ه": "H",
+    "و": "W",
+    "ي": "Y",
+    " ": " " // Space mapping
+    // Add more mappings as needed
+  };
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+  // Remove spaces between letters within words
+  input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  input = input.replace(/\s/g, " ");
+
+  return input;
+}
+
+function showResult2() {
+    var replacedText = replaceCharacters9();
+    var transformedText = transform4(replacedText);
+
+    document.getElementById("output").innerText = transformedText;
+}
+
+
+function transformInput5() {
+  var input = document.getElementById("inputText").value;
+  var output = document.getElementById("output");
+  var transformedInput = transform5(input);
+
+  output.textContent = "  " + transformedInput;
+//  Musnad to English  document.getElementById("inputText").value = ""; // Clear the input field
+
+function transform5(input) {
+  var dictionary =  {
+   "𐩪": "s¹",
+    "𐩦":"s²",
+    "𐩯":"s³",
+    "𐩱":"ʾ",
+    "𐩨":"b",
+    "𐩩":"t",
+    "𐩻":"ṯ",
+    "𐩴":"g",
+   "𐩢":"ḥ",
+    "𐩭":"ḫ",
+    "𐩵":"d",
+    "𐩹":"ḏ",
+    "𐩧":"r",
+    "𐩸":"z",
+    "𐩮":"ṣ",
+    "𐩳":"ḍ",
+    "𐩷":"ṭ",
+    "𐩼":"ẓ",
+    "𐩲":"ʿ",
+    "𐩶":"ġ",
+    "𐩰":"f",
+    "𐩤":"q",
+    "𐩫":"k",
+    "𐩡":"l",
+    "𐩣":"m",
+    "𐩬":"n",
+    "𐩠":"h",
+    "𐩥":"w",
+    "𐩺":"y",
+    " ": " " // Space mapping
+    // Add more mappings as needed
+  };
+  // Replace text based on dictionary
+  for (var key in dictionary) {
+    var regex;
+    if (key === "s" || key === "S" || key === "¹" || key === "²" || key === "³") {
+      // Match "s", "S", "¹", "²", or "³" only if not followed by an exponential number
+      regex = new RegExp("(?<![¹²³])" + key + "(?![¹²³])", "g");
+    } else {
+      regex = new RegExp(key, "g");
+    }
+    input = input.replace(regex, dictionary[key]);
+  }
+
+  // Remove spaces between letters within words
+  input = input.replace(/\b(\w)\s+(?=\w)\b/g, "$1");
+  // Restore spaces between words
+  input = input.replace(/\s/g, " ");
+
+  return input;
+}
+
+
+
+}
+
+
+function copyInputText() { var inputText = document.getElementById("inputText"); inputText.select(); document.execCommand("copy"); }
+
+function cutInputText() { var inputText = document.getElementById("inputText"); inputText.select(); document.execCommand("cut"); } function deleteInputText() { document.getElementById("inputText").value = ""; }
+
+function deleteInputText() { document.getElementById("inputText").value = ""; }
+
+// output
+function copyOutputText() { var outputText = document.getElementById("output"); var range = document.createRange(); range.selectNode(outputText); window.getSelection().removeAllRanges(); window.getSelection().addRange(range); document.execCommand("copy"); window.getSelection().removeAllRanges(); }
+
+
+function deleteOutputText() { document.getElementById("output").textContent = ""; }
+// Combined function to call both transformations
+function combineTransformations() {
+    replaceCharacters();
+    transformInput1();
+}
+
+function pasteFromClipboard() { navigator.clipboard.readText() .then(text => { document.getElementById("inputText").value = text; }) .catch(err => { console.error('Failed to read clipboard contents: ', err); }); } 
+
+        function pasteFromClipboard0() {
+            var inputElement = document.getElementById("inputText");
+            var userInput = prompt("Please paste your text here:");
+            if (userInput !== null) {
+                inputElement.value = userInput;
+            }
+        }
+ 
+
+
+</script>
+<br>
+ 
+----------------------------------------
+<br>
+: للتواصل
+<br>
+Email: S8B@live.com | <a href="https://twitter.com/S7Ryn/">Twitter/X@S7Ryn</a><br>
+
+نرحب بتواصلكم واقتراحاتكم للدعم والتطوير <br>
+♡ شكرا لكم
+Thank you! ♡ <br>
+جميع الحقوق محفوظة © ٢٠٢٤ | صالح باريان<br>
+نسخة محدثة ومطورة عن نسخة العام ٢٠٢٢ <br>
+Copyright © all rights reserved © 2024
+<br>
+
+</body>
+</html>

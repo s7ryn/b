@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html lang="en">
+ <left>
+
+<left>
+
+ <div style="text-align: left;">
+        <h2>  Saleh Musnad Tools  | </h2>
+<h2>  أدوات تفسير النقوش</h2>
+</left>
+
+<left>
+<img src="https://static.wixstatic.com/media/62c16e_fd003eb102284f24a2660eb85274b77c~mv2.jpg/v1/crop/x_0,y_0,w_685,h_395/fill/w_370,h_213,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/saleh%20(1)_edited_edited.jpg" alt="" style="width:190px; height:80px;">
+</left><br>
+<left>
+--------------------------------------- <br>
+---------------------------------------
+
+ </left>
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Translator</title>
+
+
+</head>
+<div style="text-align: left;">
+    <h2>  تعديل القاموس وتفسير النقوش</h2>
+  
+<a href="https://twitter.com/S7Ryn/">Twitter/X@S7Ryn</a> <br>
+<h4> by SALEH BA RAYAN </h4> 
+    <label for="dictionary">القاموس | Dictionary:</label><br>
+        <textarea id="dictionary" rows="5" cols="30" placeholder="Dictionary... ادخل القاموس"></textarea><br><br>
+
+<input type="file" id="excelInput" accept=".xlsx"><br><br>
+
+
+
+<button onclick="importFromExcel22()">الرفع من الملف</button><br>
+
+
+<br>
+<button onclick="importFromExcel300()">استيراد من القاموس المدمج</button><br>
+
+<br>
+    <button onclick="saveAsText()">الحفظ كملف نصي</button><br><br>
+
+أو
+<br>
+    <button onclick="pasteFromClipboard9()"> لصق القاموس </button>
+<br><br>
+<button onclick="deleteoutputText9()">حذف القاموس</button>
+<button onclick="copyInputText9()">نسخ القاموس 
+</button>
+<br><br>
+
+<label for="text">النص | Text:</label><br>
+       
+<textarea id="text" rows="5" cols="30" placeholder=" ادخل نص النقش من الخطوة الرابعة"></textarea><br><br>
+
+<button style="background-color: lightgreen;" onclick="pasteFromClipboard2()">  لصق النقش </button> <br> <br>
+<centre>
+أو
+</centre>
+<br> <br>
+<button onclick="deleteInputText9()"> مسح النص</button>
+<br> <br>
+<button onclick="cutInputText9()"> قص النص</button>
+<br> <br>
+<button style="background-color: lightgreen;" onclick="translateText()"> تفسير النقش </button> 
+ <br>       
+<div id="outputBox"> 
+<p id="translation"></p>
+</div> 
+<style> /* Styling for the output box */ #outputBox { border: 5px solid #ccc; padding: 10px; margin-top: 30px; width: 250px; /* Adjust width as needed */ } </style>
+<style> /* Define the width and height of the input box */ #text { width: 250px; height: 50px; /* Adjust the height as needed */ } </style>
+<style> /* Define the width and height of the input box */ #dictionary { width: 250px; height: 50px; /* Adjust the height as needed */ } </style>
+
+
+<script>
+
+function importFromExcel22() {
+            var excelInput = document.getElementById('excelInput');
+            var file = excelInput.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var data = new Uint8Array(event.target.result);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var sheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[sheetName];
+                var excelData = XLSX.utils.sheet_to_json(worksheet);
+
+                var outputText = "{";
+                excelData.forEach(row => {
+                    // Access the values from columns 1 and 2 directly
+                    var key = row['A']; // Replace 'COLUMN1' with the actual header of the first column
+                    var value = row['B']; // Replace 'COLUMN2' with the actual header of the second column
+                    outputText += `" ${key} ": " ${value} ", `;
+                });
+                outputText = outputText.slice(0, -2) + "}";
+                document.getElementById("dictionary").value = outputText;
+            };
+
+            reader.onerror = function(event) {
+                console.error('Failed to read the file: ', event.target.error);
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+        function saveAsText() {
+            var textToSave = document.getElementById("dictionary").value;
+            var blob = new Blob([textToSave], { type: "text/plain;charset=utf-8" });
+            var fileName = "output.txt";
+            saveAs(blob, fileName);
+        }
+
+        function saveAs(blob, fileName) {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = fileName || "download";
+            var clickHandler = function () {
+                setTimeout(function () {
+                    window.URL.revokeObjectURL(url);
+                    this.removeEventListener("click", clickHandler);
+                }, 150);
+            };
+            a.addEventListener("click", clickHandler, false);
+            a.click();
+        }
+
+
+
+
+
+
+function importFromExcel30() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://raw.githubusercontent.com/saleh757psu/new/main/test.xlsx", true);
+        xhr.responseType = "arraybuffer";
+
+        xhr.onload = function () {
+            var data = new Uint8Array(xhr.response);
+            var workbook = XLSX.read(data, { type: "array" });
+            var sheetName = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[sheetName];
+            var excelData = XLSX.utils.sheet_to_json(worksheet);
+
+            var outputText = "{";
+            excelData.forEach(row => {
+                // Access the values from columns 1 and 2 directly
+                var key = row['A']; // Replace 'COLUMN1' with the actual header of the first column
+                var value = row['B']; // Replace 'COLUMN2' with the actual header of the second column
+                outputText += `" ${key} ": " ${value} ", `;
+            });
+            outputText = outputText.slice(0, -2) + "}";
+            document.getElementById("dictionary").value = outputText;
+        };
+
+        xhr.onerror = function (event) {
+            console.error('Failed to read the file: ', event.target.error);
+        };
+
+        xhr.send();
+    }
+
+
+    
+   
+        
+
+function importFromExcel300() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://raw.githubusercontent.com/saleh757psu/new/main/test.xlsx", true);
+        xhr.responseType = "arraybuffer";
+
+        xhr.onload = function () {
+            var data = new Uint8Array(xhr.response);
+            var workbook = XLSX.read(data, { type: "array" });
+            var sheetName = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[sheetName];
+            var excelData = XLSX.utils.sheet_to_json(worksheet);
+
+
+
+            var outputText = "{";
+            excelData.forEach(row => {
+                // Access the values from columns 1 and 2 directly
+                var key = row['A']; // Replace 'COLUMN1' with the actual header of the first column
+                var value = row['B']; // Replace 'COLUMN2' with the actual header of the second column
+
+
+                outputText += `" ${key} ": " ${value} ", `;
+          });
+ outputText = outputText.slice(0, -2) +","+importFromTextFile200();
+
+outputText = outputText.replace(/undefined/g, ''); document.getElementById("dictionary").value = outputText;
+
+            document.getElementById("dictionary").value = outputText;
+        };
+
+        xhr.onerror = function (event) {
+            console.error('Failed to read the file: ', event.target.error);
+        };
+
+        xhr.send();
+    }
+function importFromTextFile200() {
+            // Replace 'proxy.php' with the path to your server-side script
+            var proxyURL = 'https://raw.githubusercontent.com/saleh757psu/new/main/dic3.txt';
+            
+            fetch(proxyURL)
+                .then(response => response.text())
+                .then(textData => {
+                    var combinedText = document.getElementById("dictionary").value.trim() + '\n' + textData;
+                    document.getElementById("dictionary").value = combinedText;
+                })
+                .catch(error => {
+                    console.error('Failed to import text file: ', error);
+                });
+        }
+
+
+
+
+
+        function translateText() {
+            var dictionaryInput = document.getElementById("dictionary").value.trim();
+            var text = document.getElementById("text").value.trim();
+            var translation = "";
+
+            // Parse dictionary JSON
+            var dictionary = {};
+            try {
+                dictionary = JSON.parse(dictionaryInput);
+            } catch (error) {
+                document.getElementById("translation").textContent = "Error parsing dictionary!";
+                return;
+            }
+
+            for (var phrase in dictionary) {
+                if (text.includes(phrase)) {
+                    text = text.replace(new RegExp(phrase, 'g'), dictionary[phrase]);
+                }
+            }
+
+            translation = text;
+            document.getElementById("translation").textContent = translation;
+        }
+
+function importFromTextFile2() {
+            // Replace 'proxy.php' with the path to your server-side script
+            var proxyURL = 'https://raw.githubusercontent.com/saleh757psu/new/main/dic.txt';
+            
+            fetch(proxyURL)
+                .then(response => response.text())
+                .then(textData => {
+                    var combinedText = document.getElementById("dictionary").value.trim() + '\n' + textData;
+                    document.getElementById("dictionary").value = combinedText;
+                })
+                .catch(error => {
+                    console.error('Failed to import text file: ', error);
+                });
+        }
+
+    </script>
+
+<button style="background-color: lightgreen;" onclick="copyOutputText55bb()">نسخ النتيجة</
+button>
+<br>
+<button onclick="deleteOutputText55bb()">حذف النتيجة</button> 
+<br>
+
+<script> 
+function pasteFromClipboard9() { navigator.clipboard.readText() .then(text => { document.getElementById("dictionary").value = text; }) .catch(err => { console.error('Failed to read clipboard contents: ', err); }); } 
+</script>
+<script> 
+function pasteFromClipboard2() { navigator.clipboard.readText() .then(text => { document.getElementById("text").value = text; }) .catch(err => { console.error('Failed to read clipboard contents: ', err); }); } 
+</script>
+
+<script>
+function copyInputText9() { var inputText = document.getElementById("dictionary"); inputText.select(); document.execCommand("copy"); }
+
+
+function cutInputText9() { var inputText = document.getElementById("text"); inputText.select(); document.execCommand("cut"); } function deleteInputText() { document.getElementById("text").value = ""; }
+
+function deleteInputText9() { document.getElementById("text").value = ""; }
+
+function deleteoutputText9() { document.getElementById("dictionary").value = ""; }
+
+function deleteInputText()
+ { document.getElementById("inputText").value = ""; }
+function deleteoutputText() { document.getElementById("inputText").value = ""; }
+
+
+
+function copyOutputText55bb() { var outputText = document.getElementById("translation"); var range = document.createRange(); range.selectNode(outputText); window.getSelection().removeAllRanges(); window.getSelection().addRange(range); document.execCommand("copy"); window.getSelection().removeAllRanges(); }
+
+
+
+
+
+function deleteOutputText55bb() { document.getElementById("translation").textContent = ""; }
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dictionary Lookup</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+    <style>
+        .word {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>البحث في المعجم</h1>
+: ادخل جذر الكلمة المراد البحث عنها 
+
+
+ <br>
+
+(مثال: كلمة مسند، جذرها:سند)
+<br>
+
+    
+
+<br>
+    <label for="inputText"> :جذر الكلمة</label><br>
+    <textarea id="inputText" rows="2" cols="20"></textarea><br><br>
+<button onclick="importFromURL()">بحث</button><br><br>
+ 
+    
+    <label for="outputDictionary">:المعاني </label><br>
+   
+<div id="outputDictionary"></div><br><br>
+
+  <style> /* Styling for the output box */ #outputDictionary { border: 5px solid #ccc; padding: 10px; margin-top: 20px; width: 250px; /* Adjust width as needed */ } </style>
+
+
+    <script>
+
+
+
+
+
+
+
+
+        var dictionary = {};
+
+
+        var fileURL = "https://raw.githubusercontent.com/saleh757psu/new/main/dic2.xlsx"; // Default URL
+
+        function importFromURL() {
+            importFromExcel(fileURL);
+        }
+
+
+
+   function importFromExcel(fileURL) {
+            fetch(fileURL)
+                .then(response => response.arrayBuffer())
+                .then(data => {
+                    var workbook = XLSX.read(data, { type: 'array' });
+                    var sheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[sheetName];
+                    var excelData = XLSX.utils.sheet_to_json(worksheet);
+
+                    excelData.forEach(row => {
+                        var word = row['A'];
+                        var meaning = row['B'];
+                        if (!dictionary[word]) {
+                            dictionary[word] = [];
+                        }
+                        dictionary[word].push(meaning);
+                    });
+
+                    lookupWords();
+                })
+                .catch(error => {
+                    console.error('Failed to fetch the file: ', error);
+                    alert("Failed to import dictionary. Please check the URL and try again.");
+                });
+        }
+
+
+
+
+        function lookupWords() {
+            var inputText = document.getElementById('inputText').value.trim();
+            var outputContainer = document.getElementById('outputDictionary');
+            outputContainer.innerHTML = '';
+
+            var words = inputText.split(/\s+/);
+            words.forEach(word => {
+                var resultDiv = document.createElement('div');
+                if (dictionary[word]) {
+                    var meanings = dictionary[word];
+                    var wordElement = document.createElement('span');
+                    wordElement.textContent = word;
+                    wordElement.classList.add('word');
+                    resultDiv.appendChild(wordElement);
+
+                    var meaningsList = document.createElement('ul');
+                    meanings.forEach(meaning => {
+                        var meaningItem = document.createElement('li');
+                        meaningItem.textContent = meaning;
+                        meaningsList.appendChild(meaningItem);
+                    });
+                    resultDiv.appendChild(meaningsList);
+                } else {
+                    resultDiv.textContent = `${word} = Not found`;
+                }
+                outputContainer.appendChild(resultDiv);
+            });
+
+
+
+        }
+    </script>
+
+
+<br>
+ 
+----------------------------------------
+<br>
+: للتواصل
+<br>
+Email: S8B@live.com | <a href="https://twitter.com/S7Ryn/">Twitter/X@S7Ryn</a><br>
+
+نرحب بتواصلكم واقتراحاتكم للدعم والتطوير <br>
+♡ شكرا لكم
+Thank you! ♡ <br>
+جميع الحقوق محفوظة © ٢٠٢٤ | صالح باريان<br>
+نسخة محدثة ومطورة عن نسخة العام ٢٠٢٢ <br>
+Copyright © all rights reserved © 2024
+<br>
+
+</body>
+</html>
