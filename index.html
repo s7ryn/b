@@ -319,6 +319,7 @@ function combineTransformations() {
     <label for="inputText"> :جذر الكلمة </label><br>
 
     <textarea id="inputText7" rows="5" cols="30"></textarea><br><br>
+ <button onclick="pasteFromClipboard07()">لصق</button><br><br>
 <button onclick="importFromURL()">بحث</button><br><br>
  
     
@@ -332,6 +333,7 @@ function combineTransformations() {
     <script>
 
 
+function pasteFromClipboard07() { navigator.clipboard.readText() .then(text => { document.getElementById("inputText7").value = text; }) .catch(err => { console.error('Failed to read clipboard contents: ', err); }); } 
 
 
 
@@ -668,10 +670,7 @@ function importFromTextFile2() {
 
     </script>
 <br>
-<button style="background-color: lightgreen;" onclick="copyOutputText55bb()">نسخ النتيجة</
-button>
-<br>
-
+<button style="background-color: lightgreen;" onclick="copyOutputText55bb()">نسخ النتيجة</button>
 <br>
 
 <script> 
