@@ -70,7 +70,7 @@ function pasteFromClipboard0() { navigator.clipboard.readText() .then(text => { 
 <br>
 <button style="background-color: lightblue;" onclick="transformInput3()+copyOutputText()+pasteFromClipboard2()+deleteoutputText9()+importFromExcel300()"> ض ⬅️ ض</button>
 <br><br> ---------------------------------------<br>
-: الخطوة((3)): اضغط (تفسير النقش) لقراءة النقش
+: الخطوة ((3)): اضغط (تفسير النقش) لقراءة النقش
 <br> ---------------------------------------<br>
 <button style="background-color: lightgreen;" onclick="translateText()+ cleanText6()"> 🔘 تفسير النقش</button><br><br> ---------------------------------------<br>
 : 🔶️🔶️النتيجة النهائية لتفسير النقش🔶️🔶️
@@ -319,7 +319,7 @@ function combineTransformations() {
     <label for="inputText"> :جذر الكلمة </label><br>
 
     <textarea id="inputText7" rows="5" cols="30"></textarea><br><br>
- <button onclick="pasteFromClipboard07()">لصق</button><br><br>
+ <button onclick="pasteFromClipboard07()">لصق</button><br> <button onclick="deleteInputText7()">مسح</button><br>
 <button onclick="importFromURL()">بحث</button><br><br>
  
     
@@ -335,6 +335,7 @@ function combineTransformations() {
 
 function pasteFromClipboard07() { navigator.clipboard.readText() .then(text => { document.getElementById("inputText7").value = text; }) .catch(err => { console.error('Failed to read clipboard contents: ', err); }); } 
 
+function deleteInputText7() { document.getElementById("inputText7").value = ""; }
 
 
 
@@ -461,7 +462,7 @@ function pasteFromClipboard07() { navigator.clipboard.readText() .then(text => {
 
 <label for="text">النص | Text:</label><br>
        
-<textarea id="text" rows="5" cols="30" placeholder=" ادخل نص النقش من الخطوة الرابعة"></textarea><br><br>
+<textarea id="text" rows="5" cols="30" placeholder=" ادخل نص النقش "></textarea><br><br>
 
 <button style="background-color: lightgreen;" onclick="pasteFromClipboard2()">  لصق النقش </button> <br> <br>
 <centre>
@@ -804,7 +805,7 @@ function deleteoutputText() { document.getElementById("inputText").value = ""; }
 : للتواصل
 <br>
 Email: S8B@live.com | <a href="https://twitter.com/S7Ryn/">Twitter/X@S7Ryn</a><br>
-***
+***<br>
 نرحب بتواصلكم واقتراحاتكم للدعم والتطوير <br>
 ♡ شكرا لكم
 Thank you! ♡ <br>
