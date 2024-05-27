@@ -72,7 +72,8 @@ function pasteFromClipboard0() { navigator.clipboard.readText() .then(text => { 
 <br><br> ---------------------------------------<br>
 : الخطوة ((3)): اضغط (تفسير النقش) لقراءة النقش
 <br> ---------------------------------------<br>
-<button style="background-color: lightgreen;" onclick="translateText()+ cleanText6()"> 🔘 تفسير النقش</button><br><br> ---------------------------------------<br>
+<button style="background-color: lightgreen;" onclick="translateText()+ cleanText6()"> 🔘 تفسير النقش<
+                                                                                                     /button><br><br> ---------------------------------------<br>
 : 🔶️🔶️النتيجة النهائية لتفسير النقش🔶️🔶️
 
 
@@ -84,7 +85,7 @@ function pasteFromClipboard0() { navigator.clipboard.readText() .then(text => { 
 </div>
 <button onclick="deleteOutputText()">  مسح ✖</button> <button onclick="copyOutputText()"> نسخ 🔲 </button>
 <br><br>
-<button onclick="transformInput3()+copyOutputText()+pasteFromClipboard2()+deleteoutputText9()+importFromExcel300()">  ارجاع لنص النقش</button> <br> <button onclick="translateText()+ cleanText6()"> النص المفسر </button>
+<button onclick="transformInput3()+copyOutputText()+pasteFromClipboard2()+deleteoutputText9()+importFromExcel300()">  ارجاع نص النقش</button> <br> <button onclick="translateText()+ cleanText6()"> اظهار النص المفسر </button>
 
 <br>
 <script>
@@ -307,6 +308,7 @@ function combineTransformations() {
     <p style="color:olive;">☆☆ 🔸️🔸️ ☆☆
     </left>
     <h4>البحث في المعجم</h4>
+ <h4>Search in Dictionary</h4>
 : ادخل جذر الكلمة المراد البحث عنها 
 
 <br>
@@ -319,8 +321,8 @@ function combineTransformations() {
     <label for="inputText"> :جذر الكلمة </label><br>
 
     <textarea id="inputText7" rows="5" cols="30"></textarea><br><br>
- <button onclick="pasteFromClipboard07()">لصق</button><button onclick="deleteInputText7()">مسح</button><br><br> 
-<button onclick="importFromURL()">بحث</button><br><br>
+ <button onclick="pasteFromClipboard07()">لصق ◼ </button><button onclick="deleteInputText7()">مسح ✖</button><br><br> 
+<button onclick="importFromURL()">بحث 🔎</button><br><br>
  
     
     <label for="outputDictionary">:المعاني </label><br>
