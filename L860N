@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .collapsible:hover {
+            background-color: #f1f1f1;
+        }
+        .collapsible::before {
+            content: '\25B6'; /* Right-pointing arrow */
+            color: #000;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .active::before {
+            content: '\25BC'; /* Down-pointing arrow */
+        }
+        .content {
+            display: none;
+            margin-left: 20px;
+        }
+        .member {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+        .member img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .member span.name {
+            font-weight: bold;
+            color: blue;
+            margin-right: 10px;
+        }
+        .member span.date {
+            color: gray;
+            font-size: smaller;
+        }
+        .member span.info {
+            margin-left: 10px;
+            font-size: smaller;
+            color: gray;
+        }
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Family Tree</h2>
+
+<div class="buttons">
+    <button id="expandAll">Expand All</button>
+    <button id="collapseAll">Collapse All</button>
+</div>
+
+<ul>
+    <li>
+        <div class="collapsible"><img src="https://www.theytree.com/static/images/nflags/ye.png" alt="Flag"><span class="name">Grandfather</span> <span class="date">(1900 - 1980)</span> <span class="info">Born in City A, worked as a farmer.</span></div>
+        <ul class="content">
+            <li>
+                <div class="collapsible"><img src="flag.png" alt="Flag"><span class="name">Father</span> <span class="date">(1930 - 2000)</span> <span class="info">Engineer, lived in City B.</span></div>
+                <ul class="content">
+                    <li>
+                        <div class="collapsible"><img src="flag.png" alt="Flag"><span class="name">Me</span> <span class="date">(1960 - )</span> <span class="info">Doctor, currently residing in City C.</span></div>
+                        <ul class="content">
+                            <li>
+                                <div class="member"><img src="flag.png" alt="Flag"><span class="name">Child</span> <span class="date">(1990 - )</span> <span class="info">Software Developer, lives in City D.</span></div>
+                            </li>
+                            <li>
+                                <div class="member"><img src="flag.png" alt="Flag"><span class="name">Child Sibling</span> <span class="date">(1995 - )</span> <span class="info">Artist, lives in City E.</span></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="member"><img src="flag.png" alt="Flag"><span class="name">My Sibling</span> <span class="date">(1965 - )</span> <span class="info">Teacher, resides in City F.</span></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="member"><img src="flag.png" alt="Flag"><span class="name">Father's Sibling</span> <span class="date">(1935 - 2010)</span> <span class="info">Lawyer, lived in City G.</span></div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var coll = document.getElementsByClassName("collapsible");
+
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+
+        document.getElementById("expandAll").addEventListener("click", function() {
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].classList.add("active");
+                coll[i].nextElementSibling.style.display = "block";
+            }
+        });
+
+        document.getElementById("collapseAll").addEventListener("click", function() {
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].classList.remove("active");
+                coll[i].nextElementSibling.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
